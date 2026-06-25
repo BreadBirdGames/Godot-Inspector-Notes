@@ -10,9 +10,9 @@ var save_obj: Object
 func load_note() -> void:
 	if save_obj == null: return
 	
+	if not save_obj.has_meta("note"): return
 	var note = save_obj.get_meta("note", null)
-	if note == null: return
-	
+		
 	if edit == null: return
 	edit.text = note
 

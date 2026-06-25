@@ -4,7 +4,7 @@ extends EditorInspectorPlugin
 var TextPiece = preload("res://addons/inspector_notes/inspector_text.gd")
 
 func _can_handle(object: Object) -> bool:
-	return true
+	return object is Resource || object is Node
 
 func _parse_begin(object: Object) -> void:
 	add_custom_control(TextPiece.new(object))
