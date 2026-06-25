@@ -38,7 +38,7 @@ jobs:
           # Copy selected root files if they exist
           for file in "${ROOT_FILES[@]}"; do
             if [ -e "$file" ]; then
-              cp -r "$file" package/
+              cp -r "$file" package/addons/inspector_notes/
             fi
           done
 
