@@ -22,30 +22,7 @@ jobs:
 
       - name: Create ZIP
         run: |
-          TAG="${{ steps.version.outputs.version }}"
-
-          # Files from the repository root to include
-          ROOT_FILES=(
-            "README.md"
-            "LICENSE"
-          )
-
-          mkdir package
-
-          # Copy the addons directory
-          cp -r addons package/
-
-          # Copy selected root files if they exist
-          for file in "${ROOT_FILES[@]}"; do
-            if [ -e "$file" ]; then
-              cp -r "$file" package/addons/inspector_notes/
-            fi
-          done
-
-          (
-            cd package
-            zip -r "../addons-${TAG}.zip" .
-          )
+          zip -r addons.zip addons
 
       - name: Create release if needed
         env:
@@ -64,4 +41,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ steps.version.outputs.version }}"
-          gh release upload "$TAG" "addons-${TAG}.zip" --clobber
+
+          gh release upload "$TAG" addons.zip --clobber
